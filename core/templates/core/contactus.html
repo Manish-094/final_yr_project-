@@ -1,0 +1,208 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block corecss %}
+
+<style>
+  /*@keyframes colochng{
+    0%{
+      background-color: black;
+    }
+    25%{
+      background-color: #F47C7C;
+    }
+    50%{
+      background-color: #125B50;
+    }
+    75%{
+      background-color: #CDC2AE;
+    }
+    100%{
+      background-color: #2F8F9D;
+    }
+  }
+*/
+
+body{
+/*  background-color: #FF0000;
+  animation-name: colochng;
+  animation-duration: 6s;
+  animation-direction: alternate-reverse;
+  animation-iteration-count: infinite;
+  */
+  font-family: Arial, Helvetica, sans-serif;
+  background-color:#CDC2AE;
+
+}
+.nav-item a{
+  font-size: 1rem !important;
+  color: black !important;
+}
+.nav-item a:hover{
+  color: blue !important;
+}
+.navbar-brand{
+  font-size: 1rem !important;
+}
+ .navbar-brand{
+    color: #4700D8 !important;
+    text-shadow: 2px 2px 8px #FF0000;
+ }
+ .rowcontainer{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   justify-content: space-around;
+ }
+
+ .quote-row{
+   display: flex;
+   justify-content: center;
+   justify-content: space-around;
+   align-items: center;
+   text-align: center;
+ }
+ .quote-row p{
+  text-transform: uppercase;
+  font-weight:bold;
+  font-size: 1.2rem;
+}
+
+
+h3{
+  text-shadow: 2px 2px 8px green;
+}
+.input-icons i {
+  position: absolute;
+}
+.icon{
+  padding: 0.6rem 0 1rem 0.5rem;
+   text-align: center;
+}
+.input-field{
+  text-align: center !important;
+}
+button{
+  font-size: 1.5rem !important;
+  box-shadow: 2px 2px  red !important;
+  border-radius: 1rem !important;
+  padding: 0 2px !important;
+}
+button:hover{
+  background-color: #125B50 !important;
+}
+/*@keyframes changecolor{
+  0%{
+   
+    width: 100%;
+  }
+  25%{
+  
+    width: 10%;
+  }
+  50%{
+  
+    width: 20%;
+  }
+  75%{
+    
+    width: 10%;
+  }
+  100%{
+   
+    width: 50%;
+  }
+}
+.imgdiv img{
+  
+  animation-name: changecolor;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+*/
+@media only screen and (max-width:600px) and (max-width:768px){
+    .contact-col{
+      margin-bottom: 2rem;
+    }
+}
+@media only screen and (min-width:992px) and (min-width:1200px)
+{
+      .contact-container{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+      }
+}
+
+@media (max-width:600px){
+  .imgdiv{
+    margin-bottom: 2rem;
+  }
+}
+
+</style>
+{% endblock corecss %}
+<title> {% block title %}Contact Us{% endblock title %}</title>
+{% block maincontent %}
+
+          <div class="container-fluid my-2">
+            <div class="row quote-row mx-auto">
+              <div class="col-md-3">
+                <p>" If you don't sacrifice for what you want, what you want will become the sacrifice </p>
+              </div>
+              <div class="col-md-3">
+                <p>" THE PRESERVATION OF HEALTH IS EASIER THAN CURE OF DISEASE "</p>
+              </div>
+              <div class="col-md-3">
+               <p>" Every Human Being is the author of his own health and disease "</p>
+              </div>
+            </div>
+            <hr style="border:1px solid black;" />
+          </div>
+          
+       
+   
+        <div class="container-fluid contact-container">
+          <div class="row rowcontainer my-3 mx-auto">
+            <div class="col-md-5 contact-col card p-4">
+              <h3>Contact Form</h3>
+              <form action="">
+                <div class="form-group p-2 input-icons">
+                  <i class="fa-solid fa-address-book icon"></i>
+                  <input type="text" name="fname",id='fname' placeholder="Your First Name.." autocomplete="none" class="form-control input-field">
+                </div>
+  
+                <div class="form-group p-2 input-icons">
+                  <i class="fa-solid fa-address-book icon"></i>
+                  <input type="text" name="lname" id="lname" placeholder="Your Last Name.." autocomplete="none" class="form-control input-field">
+                </div>
+  
+                <div class="form-group p-2 input-icons">
+                  <i class="fa-solid fa-envelope icon"></i>
+                  <input type="email" name="email" id="email" placeholder="Email Address.." autocomplete="none" class="form-control input-field">
+                </div>
+  
+                <div class="form-group p-2 input-icons">
+                  <i class="fa-solid fa-phone icon"></i>
+                  <input type="number" name="phone" id="phone" placeholder="Your Number.." autocomplete="none" class="form-control input-field">
+                </div>
+  
+                <div class="form-group p-2">
+                  <textarea placeholder="Message.." cols="30" rows="5" class="form-control"></textarea>
+                </div>
+  
+                <button type="submit" class=" btn btn-primary  p-1 mt-2">Submit</button>
+              </form>
+          </div>
+            
+            <div class="col-md-5 imgdiv">
+                <img src="{% static 'core/images/contact_svg.svg' %}" class="img-fluid" alt="image">
+            </div>
+          </div>
+          </div>
+        
+
+
+{% endblock maincontent %}

@@ -1,0 +1,149 @@
+{% extends 'core/base.html' %}
+{% block title %}COVID-19{%endblock title %}
+{% block corecss %}
+
+<style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&family=Piazzolla:wght@100;300;600&display=swap');
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Lato', sans-serif;
+    }
+   
+    .nav-item a{
+        font-size: 1rem !important;
+        color: black !important;
+    }
+    .nav-item a:hover{
+        background-color: blue !important;
+    }
+    .navbar-brand{
+        font-size: 1.5rem !important;
+    }
+    
+    .navbar-brand{
+       color: #4700D8 !important;
+       text-shadow: 2px 2px 8px #FF0000;
+    }
+    body{
+        background-image: linear-gradient(blue,yellow);
+        height: 100vh;
+    }
+    th{
+        color: #fff;
+    }
+    #worldData{
+        color: #fff;
+    }
+    #cntry th{
+        color: black;
+    }
+    #individualCountryData{
+        color: #fff;
+    }
+
+</style>
+
+{% endblock corecss %}
+
+
+
+{% block maincontent %}
+
+<div class="container">
+    <h1 class="text-center mt-5 text-white">COVID-19 LIVE DATA</h1>
+    <br><br>
+    <table class="table table-hover">
+        <tr>
+            <th class="text-warning">ENTIRE WORLD DATA</th>
+        </tr>
+        <tr>
+            <th>TOTAL CASES</th>
+            <th>TOTAL RECOVERED</th>
+            <th>TOTAL DEATHS</th>
+            <th>PERCENTAGE RECOVERED </th>
+        </tr>
+        <tr id="worldData">
+
+        </tr>
+    </table>
+    <br>
+    <br>
+    <form>
+        <select id="selectcountry" onchange="individualCountriesData()">
+            <option>Choose a Country</option>
+        </select>
+    </form>
+    <br>
+    <br>
+    <table class="table table-hover">
+        <tr>
+            <th class="text-white">COUNTRY BASED DATA</th>
+        </tr>
+        <tr id="cntry">
+            <th>TOTAL CASES</th>
+            <th>TOTAL RECOVERED</th>
+            <th>TOTAL DEATHS</th>
+            <th>PERCENTAGE RECOVERED </th>
+        </tr>
+        <tr id="individualCountryData">
+
+        </tr>
+    </table>
+   
+</div>
+<script>
+    var worldData=''
+    var individualCountryData=''
+    worldInitData();
+    worldCountries();
+    function worldInitData()
+    {
+        var url =  'https://api.covid19api.com/summary'
+        $.get(url,function(worldData){
+            percentageofWorldRecovery = (worldData.Global.TotalRecovered/worldData.Global.TotalConfirmed)*100
+            worldData=`
+            <td>${worldData.Global.TotalConfirmed}</td>
+            <td>${worldData.Global.TotalRecovered}</td>
+            <td>${worldData.Global.TotalDeaths}</td>
+            <td>${percentageofWorldRecovery}</td>`
+            $("#worldData").html(worldData)
+        })
+    }
+    async function worldCountries()
+    {
+        var url = "https://api.covid19api.com/countries"
+        $.get(url,function(individualData){
+            for(var noofcountries = 0; noofcountries<=individualData.length-1;noofcountries++){
+                $("#selectcountry").append("<option value="+individualData[noofcountries].Country+">"+individualData[noofcountries].Country+"</option>")
+            }
+        })
+    }
+
+    function individualCountriesData()
+    {
+        var url =  'https://api.covid19api.com/summary'
+        $.get(url,function(individualCountryData){
+            for(var count = 0; count<=individualCountryData.Countries.length;count++)
+            {
+                var selected =  $("#selectcountry").find("option:selected").text()
+                if(individualCountryData.Countries[count].Country==selected){
+                        percentageofCountryRecovery = (individualCountryData.Countries[count].TotalRecovered/individualCountryData.Countries[count].TotalConfirmed)*100
+                        individualCountryData=`
+                        <td>${individualCountryData.Countries[count].TotalConfirmed}</td>
+                        <td>${individualCountryData.Countries[count].TotalRecovered}</td>
+                        <td>${individualCountryData.Countries[count].TotalDeaths}</td>
+                        <td>${percentageofCountryRecovery}</td>`
+                        $("#individualCountryData").html(individualCountryData)
+                        break;
+                }
+            }
+        })
+    }
+</script>
+{% endblock maincontent %}
+
+
+

@@ -1,0 +1,187 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block corecss %}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&family=Piazzolla:wght@100;300;600&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+}
+body{
+    {% comment %} background-image: url('https://images.unsplash.com/photo-1628771065518-0d82f1938462?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fGhlYWx0aGNhcmV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60');
+    background-size: cover; {% endcomment %}
+    background:#553939;
+}
+.nav-item a{
+    font-size: 1rem !important;
+    color: black !important;
+}
+.nav-item a:hover{
+     color: blue !important;
+}
+.navbar-brand{
+    font-size: 1.5rem !important;
+}
+
+.navbar-brand{
+   color: #4700D8 !important;
+   text-shadow: 2px 2px 8px #FF0000;
+}
+h3{
+    text-shadow: 3px 5px 5px #FF0000;
+    font-size: 2rem;
+}
+.btn1{
+  padding:5px 275px;
+  font-size:1rem;
+}
+form{
+  font-size:2rem;
+  font-weight:400;
+}
+.scene {
+    position: relative;
+    height: 100vh;
+    background: linear-gradient(#a6d8ff, #fff, #fff);
+    overflow-x: hidden;
+  }
+  .sun {
+    position: absolute;
+    top: 100px;
+    left: 90%;
+    transform: translate(-50%);
+    width: 100px;
+    height: 100px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 40px #fff;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .dark {
+    background: #222833;
+  }
+    .sun{
+    box-shadow: 0 0 0 #fff;
+    opacity:0.3;
+  }
+  .dark .sun::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 40px;
+    width: 100%;
+    height: 100%;
+    background: #222833;
+    border-radius: 50%;
+  }
+  .bg {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 280px;
+    background: url("{% static 'core/images/bg.png' %}");
+    animation: animateBg 25s linear infinite;
+    background-size: 1500px;
+    background-repeat: repeat-x;
+  }
+  @keyframes animateBg {
+    0% {
+      background-position-x: 0px;
+    }
+    100% {
+      background-position-x: -1500px;
+    }
+  }
+  .car1 {
+    position: absolute;
+    left: -200px;
+    bottom: 20px;
+    max-width: 200px;
+    z-index: 10;
+    animation: car1 18s linear infinite;
+  }
+  @keyframes car1 {
+    0% {
+      transform: translateX(0px);
+    }
+    90%,
+    100% {
+      transform: translateX(calc(100vw + 200px));
+    }
+  }
+
+  .car2 {
+    position: absolute;
+    right: -200px;
+    bottom: 50px;
+    max-width: 200px;
+    z-index: 9;
+    animation: car2 12s linear infinite;
+  }
+  @keyframes car2 {
+    0% {
+      transform: translateX(0px) rotateY(180deg);
+    }
+    90%,
+    100% {
+      transform: translateX(calc(-100vw - 200px)) rotateY(180deg);
+    }
+  }
+</style>
+{% endblock corecss %}
+{% block title %}Sign Up{% endblock title %}
+{% block maincontent %}
+<section class="scene dark">
+
+    <div class="container">
+        <div class="row justify-content-around mt-5">
+            <div class="col-sm-6 ">
+                <h3 class="text-white">Sign Up Form</h3>
+            </div>
+        </div>
+        <div class="row justify-content-around my-4">
+            <div class="col-sm-6">
+                <form action="" method="post" class="bg-white p-3 rounded">
+                    {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>{{message}}</strong> 
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+                        {% endfor %}
+                    {% endif %}
+                    {% csrf_token %}
+                    {% for fm in form%}
+                        {{fm.label_tag}}
+                        {{fm}}
+                        <small class="text-danger">{{dm.errors|striptags}}</small>
+                    {% endfor %}
+                    <input type="submit" value="submit" class="btn btn-primary my-2 btn1">
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+         <div class="sun"></div>
+        <div class="bg">
+          <img
+            src="{% static 'core/images/police_car.gif' %}"
+            alt="police_car"
+            class="car1"
+          />
+          <img
+            src="{% static 'core/images/police_car.gif' %}"
+            alt="car2"
+            class="car2"
+          />
+        </div>
+      </section>
+    
+{% endblock maincontent %}
+

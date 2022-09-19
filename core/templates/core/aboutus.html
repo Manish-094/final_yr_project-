@@ -1,0 +1,51 @@
+{% extends 'core/base.html' %}
+<title> {% block title %}About Us{% endblock title %}</title>
+{% block corecss %}
+
+<style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&family=Piazzolla:wght@100;300;600&display=swap');
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Lato', sans-serif;
+    }
+   
+    .nav-item a{
+        font-size: 1rem !important;
+        color: black !important;
+    }
+    .nav-item a:hover{
+        color: blue !important;
+    }
+    .navbar-brand{
+        font-size: 1.5rem !important;
+    }
+    
+    .navbar-brand{
+       color: #4700D8 !important;
+       text-shadow: 2px 2px 8px #FF0000;
+    }
+    h1{
+        text-shadow: 2px 2px 8px #FF0000;
+    }
+    hr{
+        color: black;
+    }
+</style>
+
+{% endblock corecss %}
+
+
+{% block maincontent %}
+
+  <h1 class="mt-3 text-center">About Us</h1>
+    <hr>
+    <div class="rounded">
+        <a href=""><i class="fa-brands fa-facebook-square fa-2x"></i></a>
+        <a href=""><i class="fa-brands fa-instagram-square fa-2x"></i></a>
+        <a href=""><i class="fa-brands fa-github-square fa-2x"></i></a>
+        <a href=""><i class="fa-brands fa-linkedin fa-2x"></i></a>
+    </div>
+ {% endblock maincontent %}

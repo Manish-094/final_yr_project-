@@ -1,0 +1,152 @@
+{% extends 'core/base.html' %} {% load static %} {% block corecss %}
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&family=Piazzolla:wght@100;300;600&display=swap");
+  @import url('https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap');
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Lato", sans-serif;
+ 
+  }
+  .navbar-brand {
+    font-size: 1.5rem !important;
+    font-family: 'Rubik Dirt', cursive;
+  }
+
+  .navbar-brand {
+    color: #4700d8 !important;
+    text-shadow: 2px 2px 8px #ff0000;
+  }
+  .nav-item a {
+    font-size: 1.3rem !important;
+    color: black !important;
+    margin:0 1rem;
+  }
+  .nav-item a:hover {
+     color:#4700d8 !important;
+  }
+
+
+  .scene {
+    position: relative;
+    height: 100vh;
+    background: linear-gradient(#a6d8ff, #fff, #fff);
+    overflow-x: hidden;
+  }
+  .sun {
+    position: absolute;
+    top: 100px;
+    left: 55%;
+    transform: translate(-50%);
+    width: 100px;
+    height: 100px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 50px #fff;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .dark {
+    background: #222833;
+  }
+  .dark .sun {
+    left: 45%;
+    box-shadow: 0 0 0 #fff;
+  }
+  .dark .sun::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    width: 100%;
+    height: 100%;
+    background: #222833;
+    border-radius: 50%;
+  }
+  .bg {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 280px;
+    background: url("{% static 'core/images/bg.png' %}");
+    animation: animateBg 25s linear infinite;
+    background-size: 1500px;
+    background-repeat: repeat-x;
+  }
+  @keyframes animateBg {
+    0% {
+      background-position-x: 0px;
+    }
+    100% {
+      background-position-x: -1500px;
+    }
+  }
+  .car1 {
+    position: absolute;
+    left: -200px;
+    bottom: 20px;
+    max-width: 200px;
+    z-index: 10;
+    animation: car1 18s linear infinite;
+  }
+  @keyframes car1 {
+    0% {
+      transform: translateX(0px);
+    }
+    90%,
+    100% {
+      transform: translateX(calc(100vw + 200px));
+    }
+  }
+
+  .car2 {
+    position: absolute;
+    right: -200px;
+    bottom: 50px;
+    max-width: 200px;
+    z-index: 9;
+    animation: car2 12s linear infinite;
+  }
+  @keyframes car2 {
+    0% {
+      transform: translateX(0px) rotateY(180deg);
+    }
+    90%,
+    100% {
+      transform: translateX(calc(-100vw - 200px)) rotateY(180deg);
+    }
+  }
+</style>
+
+{% endblock corecss %} {% block maincontent %}
+<!-- <div class="wrapper bg-success">
+  <div class="typing-demo">
+    <h1 class="text-white weltext">Welcome To Virtual AI Health Assistant</h1>
+  </div>
+</div> -->
+
+<section class="scene">
+  <div class="sun"></div>
+  <div class="bg">
+    <img
+      src="{% static 'core/images/police_car.gif' %}"
+      alt="police_car"
+      class="car1"
+    />
+    <img
+      src="{% static 'core/images/police_car.gif' %}"
+      alt="car2"
+      class="car2"
+    />
+  </div>
+</section>
+
+<script>
+  const sun = document.querySelector(".sun");
+  const bdy = document.querySelector(".scene");
+  sun.onclick = function () {
+    bdy.classList.toggle("dark");
+  };
+</script>
+{% endblock maincontent %}
